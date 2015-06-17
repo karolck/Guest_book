@@ -1,5 +1,5 @@
 <?php
-define('Enrties','./entries.txt');
+define('Entries','./Entries.txt');
 
 function addEntry($title, $author, $page, $content){
 	//trim - usówanie bia³ych znaków
@@ -14,12 +14,12 @@ function addEntry($title, $author, $page, $content){
 		return false;
 	}
 	
-	if(strlen($author) < 3)
+	if(strlen($author) < 2)
 	{
 		return false;
 	}
 	
-	if(strlen($content) < 10)
+	if(strlen($content) < 3)
 	{
 		return false;
 	}
@@ -46,37 +46,35 @@ function addEntry($title, $author, $page, $content){
 	fwrite($file, implode('|', $data)."\r\n");
 	fclose($file);
 	return true;
+}	
+//zmiana HTML na zwyk³y tekst
+$content = htmlspecialchars($content);
+$content = nl2br($content);
+$content = base64_encode($content);
 	
-	//zmiana HTML na zwyk³y tekst
-	$content = htmlspecialchars($content);
-	$content = nl2br($content);
-	$content = base64_encode($content);
-	
-	//pobieranie wpisów, najpierw odwracamy tablicê tak aby najnowsze wpisy by³y na pocz¹tku
-	// nastêpnie dekodujemy dane i pakujemmy wszystko do tablicy rezult
+//pobieranie wpisów, najpierw odwracamy tablicê tak aby najnowsze wpisy by³y na pocz¹tku
+// nastêpnie dekodujemy dane i pakujemmy wszystko do tablicy rezult
 	
 	
-	function getEntry(){
-		$entries = array_reverse(file(Entries));
+function getEntry(){
+	$entries = array_reverse(file(Entries));
 		
-		$i =1;
-		$rezult = array();
+	$i =1;
+	$rezult = array();
 		
-		foreach ($entries as $entry){
-			$entry = explode('|', trim($entry));
-			$rezult [] = array(
-					'id' => $i,
-					'title' => base64_decode($entry[0]),
-					'author' => base64_decode($entry[1]),
-					'date' => date('d.m.Y, H:i', $entry[2]),
-					'page' => base64_decode($entry[3]),
-					'content' => base64_decode($entry[4])
-			);
-			$i++;
-		}
-		return $rezult;
-		
+	foreach ($entries as $entry){
+		$entry = explode('|', trim($entry));
+		$rezult [] = array(
+				'id' => $i,
+				'title' => base64_decode($entry[0]),
+				'author' => base64_decode($entry[1]),
+				'date' => date('d.m.Y, H:i', $entry[2]),
+				'page' => base64_decode($entry[3]),
+				'content' => base64_decode($entry[4])
+		);
+		$i++;
 	}
-	
-	
+	return $rezult;	
 }
+	
+	
