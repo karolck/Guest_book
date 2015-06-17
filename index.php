@@ -14,7 +14,7 @@
 	
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if(addEntry($_POST['title'], $_POST['author'],  $_POST['page'], $_POST['content'])){
-			echo 'The entry wos added';
+			echo 'The entry was added';
 		}else {
 			echo 'Please fill out the form correctly';
 		}

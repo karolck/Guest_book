@@ -48,9 +48,9 @@ function addEntry($title, $author, $page, $content){
 	return true;
 }	
 //zmiana HTML na zwyk³y tekst
-$content = htmlspecialchars($content);
-$content = nl2br($content);
-$content = base64_encode($content);
+//$content = htmlspecialchars($content);
+//$content = nl2br($content);
+//$content = base64_encode($content);
 	
 //pobieranie wpisów, najpierw odwracamy tablicê tak aby najnowsze wpisy by³y na pocz¹tku
 // nastêpnie dekodujemy dane i pakujemmy wszystko do tablicy rezult
