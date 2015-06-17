@@ -26,7 +26,7 @@
  				Author: '.$entry['author'].'; Date: '.$entry['date'];
  			if(strlen($entry['page']) > 0)
  			{
- 				echo '; <a href="'.$entry['page'];
+ 				echo '; <a href="'.$entry['page'] . '"> ' . $entry['page'] .  '</a>';
  			}
  			echo '</b></p>';
  			echo '<p>'.$entry['content'].'</p>';
